@@ -142,7 +142,7 @@ public class BaseClass {
 	    
 	    if(b1==true) {
 	    	System.out.println("Now entering the adress information -------");
-	    } else System.out.println(" why is not displayed? :/ ");	
+	    } else System.out.println(" why is it not displayed? :/ ");	
 	    
 	    //Billing adress
 	    driver.findElement(By.xpath("//span[contains(text(),'Billing Street')]//ancestor::div/textarea")).sendKeys("BangaloreStreet2242");
@@ -171,7 +171,7 @@ public class BaseClass {
 	    driver.findElement(By.xpath("//span[normalize-space()='Save']")).click();
 	    
 	    
-	    System.out.println("The information was saves succesfully");
+	    System.out.println("The information was saved succesfully");
 	
 	    
 	}
