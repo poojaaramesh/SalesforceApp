@@ -38,12 +38,12 @@ public class BaseClass {
 	 static By phone = By.xpath("//span[contains(text(),'Phone')]/ancestor::div[3]//input");
 	 static By industry = By.xpath("//span[contains(text(),'Industry')]/ancestor::div[3]//following-sibling::div//a");
 	 static By industryDropdown = By.xpath("//div[@class ='select-options popupTargetContainer uiPopupTarget uiMenuList uiMenuList--default uiMenuList--left uiMenuList--short ']/div/ul");
-     static By type = By.xpath("//span[contains(text(),'Type')]/ancestor::div[3]//following-sibling::div//a");
-     static By typeDropdown = By.xpath("//div[@data-aura-class=\"uiPopupTarget uiMenuList uiMenuList--default uiMenuList--left uiMenuList--short\"]//div[@class = 'select-options']/ul");
-     static By employee= By.xpath("//span[contains(text(),'Employees')]/ancestor::div[3]//input");
-     static By adressinfo = By.xpath("//span[contains(text(),'Address Information')]");
-     static By shippingAdress = By.xpath("//span[contains(text(),'Shipping Address')]//ancestor::fieldset//button");
-     static By billingStreet = By.xpath("//span[contains(text(),'Billing Street')]//ancestor::div/textarea");
+	 static By type = By.xpath("//span[contains(text(),'Type')]/ancestor::div[3]//following-sibling::div//a");
+	 static By typeDropdown = By.xpath("//div[@data-aura-class=\"uiPopupTarget uiMenuList uiMenuList--default uiMenuList--left uiMenuList--short\"]//div[@class = 'select-options']/ul");
+	 static By employee= By.xpath("//span[contains(text(),'Employees')]/ancestor::div[3]//input");
+	 static By adressinfo = By.xpath("//span[contains(text(),'Address Information')]");
+	 static By shippingAdress = By.xpath("//span[contains(text(),'Shipping Address')]//ancestor::fieldset//button");
+	 static By billingStreet = By.xpath("//span[contains(text(),'Billing Street')]//ancestor::div/textarea");
 	 static By billingCity = By.xpath("//span[contains(text(),'Billing City')]//ancestor::div/input");
 	 static By billingState = By.xpath("//span[contains(text(),'Billing State/Province')]//ancestor::div/input");
 	 static By billingPostalCode = By.xpath("//span[contains(text(),'Billing Zip/Postal Code')]//ancestor::div/input");
@@ -263,12 +263,12 @@ public class BaseClass {
 	     
 	     //BILLING ADDRESS
 	     driver.findElement(By.xpath("//span[normalize-space()='Billing Address']/ancestor::fieldset/div//span[contains(text(),'Search Address')]")).click();
-		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Address Search')]")));
-    	 System.out.println("---Billing adress dropdown---");
+	     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Address Search')]")));
+	     System.out.println("---Billing adress dropdown---");
     	 
 	     WebElement BillingAdressTextBox = driver.findElement(By.xpath("//input[@class=' default input uiInput uiInputTextForAutocomplete uiInput--default uiInput--input']"));
-         BillingAdressTextBox.click(); 
-         BillingAdressTextBox.clear();
+	     BillingAdressTextBox.click(); 
+	     BillingAdressTextBox.clear();
 		    
 		 String key1 = "T Nagar, Chennai";
 		 for(int i = 0 ; i < key1.length(); i++) {
