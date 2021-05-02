@@ -86,8 +86,7 @@ public class BaseClass {
 		
 		driver.findElement(By.id("password")).sendKeys("Test12345!");
 		driver.findElement(By.id("Login")).click();
- 
-        wait.until(ExpectedConditions.titleIs("Lightning Experience"));
+		wait.until(ExpectedConditions.titleIs("Lightning Experience"));
 		System.out.println("after login, the title is : " + driver.getTitle());
 		*/
 	
@@ -147,30 +146,30 @@ public class BaseClass {
 		 ActionClass.textFieldType(accountNameElement, "AccountNameData");
 		
 		 WebElement websiteElement = ActionClass.fetchElement(driver,website);
-         ActionClass.textFieldType(websiteElement, "www.website123.com");
+		 ActionClass.textFieldType(websiteElement, "www.website123.com");
         
-         WebElement descriptionElement = ActionClass.fetchElement(driver, description);
-         ActionClass.textFieldType(descriptionElement, "DESCRIPTION EEEEEEEEEEEEEEEEEEEEEEEEEE");
+		 WebElement descriptionElement = ActionClass.fetchElement(driver, description);
+		 ActionClass.textFieldType(descriptionElement, "DESCRIPTION EEEEEEEEEEEEEEEEEEEEEEEEEE");
         
-         WebElement phoneElement = ActionClass.fetchElement(driver, phone);
-         ActionClass.textFieldType(phoneElement, "1234567890");
+		 WebElement phoneElement = ActionClass.fetchElement(driver, phone);
+		 ActionClass.textFieldType(phoneElement, "1234567890");
         
-         WebElement industryElement = ActionClass.fetchElement(driver,industry);
-         ActionClass.clickOnTheElement(industryElement);
-         ActionClass.waitForInvisibilityOFElementPresent(wait,industryDropdown);
-         ActionClass.selectDropdown(driver, tagNameList, "Agriculture");
+		 WebElement industryElement = ActionClass.fetchElement(driver,industry);
+		 ActionClass.clickOnTheElement(industryElement);
+		 ActionClass.waitForInvisibilityOFElementPresent(wait,industryDropdown);
+		 ActionClass.selectDropdown(driver, tagNameList, "Agriculture");
         
-         WebElement typeElement = ActionClass.fetchElement(driver,type);
-         ActionClass.clickOnTheElement(typeElement);
-         ActionClass.waitForInvisibilityOFElementPresent(wait,typeDropdown);
-         ActionClass.selectDropdown(driver, tagNameList, "Customer");
+		 WebElement typeElement = ActionClass.fetchElement(driver,type);
+		 ActionClass.clickOnTheElement(typeElement);
+		 ActionClass.waitForInvisibilityOFElementPresent(wait,typeDropdown);
+		 ActionClass.selectDropdown(driver, tagNameList, "Customer");
         
-         WebElement employeeElement = ActionClass.fetchElement(driver,employee);
-         ActionClass.textFieldType(employeeElement, "EmployeeData");
+		 WebElement employeeElement = ActionClass.fetchElement(driver,employee);
+		 ActionClass.textFieldType(employeeElement, "EmployeeData");
         
-         //billingAdress
-         WebElement billingStreetElement = ActionClass.fetchElement(driver, billingStreet);
-   	     ActionClass.textFieldType(billingStreetElement, "Bangalore Street No 12344");
+		 //billingAdress
+		 WebElement billingStreetElement = ActionClass.fetchElement(driver, billingStreet);
+		 ActionClass.textFieldType(billingStreetElement, "Bangalore Street No 12344");
    	    
    	     WebElement billingCityElement = ActionClass.fetchElement(driver, billingCity);
 	     ActionClass.textFieldType(billingCityElement, "Bangalore");
@@ -210,54 +209,53 @@ public class BaseClass {
 	
 
 	public static void tearDown() {
-         driver.quit();		
+		driver.quit();		
 	}
 
 	public static void CreateNewAccountAdressSearchDropDown() {
-		 wait.until(ExpectedConditions.titleIs("New Account | Salesforce"));
-	     System.out.println("The title of create new account page is : " +driver.getTitle());
+		wait.until(ExpectedConditions.titleIs("New Account | Salesforce"));
+		System.out.println("The title of create new account page is : " +driver.getTitle());
 			
-	     //SHIPPING ADDRESS
-		 driver.findElement(By.xpath("//span[contains(text(),'Shipping Address')]//ancestor::fieldset//button")).click();
+		//SHIPPING ADDRESS
+		driver.findElement(By.xpath("//span[contains(text(),'Shipping Address')]//ancestor::fieldset//button")).click();
 		 
-		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Address Search')]")));
-    	 System.out.println("---Shipping adress dropdown---");
-         WebElement ShippingAdressTextBox = driver.findElement(By.xpath("//input[@data-aura-class = 'uiInput uiInputTextForAutocomplete uiInput--default uiInput--input']"));
-         ShippingAdressTextBox.click();
-         ShippingAdressTextBox.clear();
-	     //ShippingAdressTextBox.sendKeys("JP NAGAR, BENGALURU");
-         //ShippingAdressTextBox.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Address Search')]")));
+		System.out.println("---Shipping adress dropdown---");
+		WebElement ShippingAdressTextBox = driver.findElement(By.xpath("//input[@data-aura-class = 'uiInput uiInputTextForAutocomplete uiInput--default uiInput--input']"));
+		ShippingAdressTextBox.click();
+		ShippingAdressTextBox.clear();
+		//ShippingAdressTextBox.sendKeys("JP NAGAR, BENGALURU");
+		//ShippingAdressTextBox.click();
+		   
+		//Actions act = new Actions(driver);
+		//act.moveToElement(ShippingAdressTextBox).keyDown(Keys.SHIFT).sendKeys("JP nagar, Bengaluru").sendKeys(Keys.ENTER);
+		//act.build().perform();
 		    
-		 //Actions act = new Actions(driver);
-		 //act.moveToElement(ShippingAdressTextBox).keyDown(Keys.SHIFT).sendKeys("JP nagar, Bengaluru").sendKeys(Keys.ENTER);
-		 //act.build().perform();
-		    
-		 String key = "JP Nagar, Bengaluru";
-		 for(int i = 0 ; i < key.length(); i++) {
+	    String key = "JP Nagar, Bengaluru";
+		for(int i = 0 ; i < key.length(); i++) {
 			 char val = key.charAt(i);
 			 wait.until(ExpectedConditions.visibilityOf(ShippingAdressTextBox));
 			 ShippingAdressTextBox.sendKeys(String.valueOf(val));
-		 }
+	    }
 		    
-		/*    
-		 try {
-		 new WebDriverWait(driver, 1000).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class = 'listContent']/ul/li")));
-	     }catch(org.openqa.selenium.StaleElementReferenceException ex){
-		        driver.findElement(By.xpath("//div[@class = 'listContent']/ul/li"));
-		        }
-		 */	 
-		  try{
-				Thread.sleep(1000);
+		 
+		/*try {
+			new WebDriverWait(driver, 1000).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class = 'listContent']/ul/li")));
+			}catch(org.openqa.selenium.StaleElementReferenceException ex){
+				driver.findElement(By.xpath("//div[@class = 'listContent']/ul/li"));
+				}*/
+		 
+		try{
+			Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-	    	}
+				}
 		  
-		 //driver.findElement(By.xpath("//div[@class = 'listContent']//span[contains(text(),'Bengaluru, Karnataka')]")).click();
-
-		 ShippingAdressTextBox.sendKeys(Keys.ARROW_DOWN);
-		 ShippingAdressTextBox.sendKeys(Keys.ARROW_DOWN);
-	     ShippingAdressTextBox.sendKeys(Keys.ENTER);
+		//driver.findElement(By.xpath("//div[@class = 'listContent']//span[contains(text(),'Bengaluru, Karnataka')]")).click();
+		ShippingAdressTextBox.sendKeys(Keys.ARROW_DOWN);
+		ShippingAdressTextBox.sendKeys(Keys.ARROW_DOWN);
+		ShippingAdressTextBox.sendKeys(Keys.ENTER);
 	     
 	     
 	     
