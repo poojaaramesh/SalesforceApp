@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,7 +15,31 @@ public class ActionClass {
 	public static WebElement fetchElement(WebDriver driver, By locator) {
 		return driver.findElement(locator);	
 	}
-
+	
+	public  static WebElement FetchElementforText(String label, WebDriver driver) {
+		return driver.findElement(By.xpath("//span[contains(text(), '"+label+"')]"));
+	}
+	
+	public static WebElement fetchElementforInput(String label,WebDriver driver) {
+		return driver.findElement(By.xpath("//span[contains(text(), '"+label+"')]//ancestor::div[3]//input"));
+	}
+	
+	public static WebElement fetchElementforTextArea(String label, WebDriver driver) {
+		return driver.findElement(By.xpath("//span[contains(text(),'"+label+"')]//ancestor::div[3]//textarea"));
+	}
+	
+	public static WebElement fetchElementforAnchor(String label, WebDriver driver) {
+		return driver.findElement(By.xpath("//span[contains(text(),'"+label+"')]/ancestor::div[3]//following-sibling::div//a"));
+	}
+	
+	public static WebElement fetchElementforAddressTextArea(String label,WebDriver driver) {
+		return driver.findElement(By.xpath("//span[contains(text(),'"+label+"')]//ancestor::div/textarea"));
+	}
+	
+	public static WebElement fetchElementforAddressInput(String label, WebDriver driver) {
+		return driver.findElement(By.xpath("//span[contains(text(),'"+label+"')]//ancestor::div/input"));
+	}
+	
 	public static void textFieldType(WebElement element, String value) {
 		if(isElementDisplayed(element) && isElementEnabled(element)) {
 			element.sendKeys(value);		
@@ -61,7 +86,7 @@ public class ActionClass {
 		
 	}
 	
-	public static WebElement waitForElementPresent(WebDriverWait wait, By locator) {
+	public static  WebElement waitForElementPresent(WebDriverWait wait, By locator) {
 			return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 	}
 
@@ -82,5 +107,34 @@ public class ActionClass {
 			     li.click();
 			   }
 			}
+	}
+
+	public static void AutoSuggestionAddressSearch(String label, String address, WebDriver driver) {
+		driver.findElement(By.xpath("//span[contains(text(),'"+label+"')]//ancestor::fieldset//button")).click();
+		 
+		new WebDriverWait(driver,50).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Address Search')]")));
+		WebElement AddressTextBox = driver.findElement(By.xpath("//input[@data-aura-class = 'uiInput uiInputTextForAutocomplete uiInput--default uiInput--input']"));
+		AddressTextBox.click(); 
+		AddressTextBox.clear();
+	
+	    String key = address;
+		for(int i = 0 ; i < key.length(); i++) {
+			 char val = key.charAt(i);
+			 new WebDriverWait(driver,50).until(ExpectedConditions.visibilityOf(AddressTextBox));
+			 AddressTextBox.sendKeys(String.valueOf(val));
+	    }
+		    
+		 
+		try{
+			Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
+		  
+		AddressTextBox.sendKeys(Keys.ARROW_DOWN);
+		AddressTextBox.sendKeys(Keys.ARROW_DOWN);
+		AddressTextBox.sendKeys(Keys.ENTER);
+		
 	}
 }

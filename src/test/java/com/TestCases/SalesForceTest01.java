@@ -13,10 +13,9 @@ public class SalesForceTest01 {
 		BaseClass.launchApp(browserName);
 		BaseClass.login();
 		BaseClass.selectNavigationLink();
-		BaseClass.CreateNewAccount();
-		//BaseClass.CreateNewAccountAdressSearchDropDown();
-	    BaseClass.tearDown();
-		
-	}
+		//BaseClass.CreateNewAccount();
+		BaseClass.CreateNewAccountAdressSearchDropDown();
+		BaseClass.tearDown();
+		}
 
 }
