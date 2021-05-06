@@ -15,13 +15,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BaseClass {
+public class BaseClass  {
 	
-     public static WebDriver driver;     
-     public static WebDriverWait wait;
+
+	 public static WebDriver driver;     
+     public static WebDriverWait wait;     
      public static String mainMenuValue = "Accounts";
      public static String subMenuValue = "New Account";
      //public static String subMenuValue = "My Accounts";
+     
 
      
  	 static By userName = By.id("username");
@@ -36,13 +38,13 @@ public class BaseClass {
 	 static By website = By.xpath("//span[contains(text(),'Website')]//ancestor::div[3]//input");
 	 static By description = By.xpath("//span[contains(text(),'Description')]//ancestor::div[3]//textarea");
 	 static By phone = By.xpath("//span[contains(text(),'Phone')]/ancestor::div[3]//input");
+	 
 	 static By industry = By.xpath("//span[contains(text(),'Industry')]/ancestor::div[3]//following-sibling::div//a");
 	 static By industryDropdown = By.xpath("//div[@class ='select-options popupTargetContainer uiPopupTarget uiMenuList uiMenuList--default uiMenuList--left uiMenuList--short ']/div/ul");
 	 static By type = By.xpath("//span[contains(text(),'Type')]/ancestor::div[3]//following-sibling::div//a");
 	 static By typeDropdown = By.xpath("//div[@data-aura-class=\"uiPopupTarget uiMenuList uiMenuList--default uiMenuList--left uiMenuList--short\"]//div[@class = 'select-options']/ul");
 	 static By employee= By.xpath("//span[contains(text(),'Employees')]/ancestor::div[3]//input");
 	 static By adressinfo = By.xpath("//span[contains(text(),'Address Information')]");
-	 static By shippingAdress = By.xpath("//span[contains(text(),'Shipping Address')]//ancestor::fieldset//button");
 	 static By billingStreet = By.xpath("//span[contains(text(),'Billing Street')]//ancestor::div/textarea");
 	 static By billingCity = By.xpath("//span[contains(text(),'Billing City')]//ancestor::div/input");
 	 static By billingState = By.xpath("//span[contains(text(),'Billing State/Province')]//ancestor::div/input");
@@ -55,7 +57,7 @@ public class BaseClass {
 	 static By shippingCountry = By.xpath("//span[contains(text(),'Shipping Country')]//ancestor::div/input");
 	 static By saveBtn = By.xpath("//span[normalize-space()='Save']");
 	 static By tagNameList = By.tagName("li");
-     
+
 	
 	public static void launchApp(String browserName) {
 		
@@ -89,8 +91,10 @@ public class BaseClass {
 		wait.until(ExpectedConditions.titleIs("Lightning Experience"));
 		System.out.println("after login, the title is : " + driver.getTitle());
 		*/
+		
 	
-		WebElement unameElement = ActionClass.fetchElement(driver, userName);	
+	
+		WebElement unameElement = ActionClass.fetchElement(driver,userName);	
 		ActionClass.textFieldType(unameElement,"gangeyab-b4bn@force.com");
 		
 		WebElement pwdElement = ActionClass.fetchElement(driver, password);
@@ -119,178 +123,109 @@ public class BaseClass {
 		 JavascriptExecutor executor = (JavascriptExecutor)driver;
 		 executor.executeScript("arguments[0].click();", sm); */
 		
-		 ActionClass.waitForPageTitle(wait,"Home | Salesforce");
+
+		
+		ActionClass.waitForPageTitle(wait,"Home | Salesforce");
 		 System.out.println("After succesfully loggin the title is : " + driver.getTitle());
 		
 	  	 WebElement menuMenuElement = ActionClass.waitForElementPresent(wait, mainMenu);
-		 ActionClass.clickOnTheElement(menuMenuElement);
+	  	ActionClass.clickOnTheElement(menuMenuElement);
 		
 		 WebElement subMenuElement = ActionClass.waitForElementPresent(wait, subMenu);
 		 ActionClass.JSclick(subMenuElement,driver);	
 	}
 	
 	
-	public static void CreateNewAccount() {
-		
-		
+	public static void CreateNewAccount() {		
+				
 		 ActionClass.waitForPageTitle(wait, "New Account | Salesforce");
 		 System.out.println("The title of create new account page is : " +driver.getTitle());
 		
-		 WebElement accountUserNameElement = ActionClass.fetchElement(driver, accountUserName);
+		 WebElement accountUserNameElement = ActionClass.FetchElementforText("Gangeya Velaga", driver);
 		 Boolean bool = ActionClass.isElementDisplayed(accountUserNameElement);
 		 if(bool==true) {
 			System.out.println("Going the right way");
 		 } else System.out.println(";/");
 		
-		 WebElement accountNameElement = ActionClass.fetchElement(driver, accountName);
+		 WebElement accountNameElement = ActionClass.fetchElementforInput("Account Name", driver);
 		 ActionClass.textFieldType(accountNameElement, "AccountNameData");
 		
-		 WebElement websiteElement = ActionClass.fetchElement(driver,website);
+		 WebElement websiteElement = ActionClass.fetchElementforInput("Website", driver);
 		 ActionClass.textFieldType(websiteElement, "www.website123.com");
         
-		 WebElement descriptionElement = ActionClass.fetchElement(driver, description);
+		 WebElement descriptionElement = ActionClass.fetchElementforTextArea("Description", driver);
 		 ActionClass.textFieldType(descriptionElement, "DESCRIPTION EEEEEEEEEEEEEEEEEEEEEEEEEE");
         
-		 WebElement phoneElement = ActionClass.fetchElement(driver, phone);
+		 WebElement phoneElement = ActionClass.fetchElementforInput("Phone",driver);
 		 ActionClass.textFieldType(phoneElement, "1234567890");
         
-		 WebElement industryElement = ActionClass.fetchElement(driver,industry);
+		 WebElement industryElement = ActionClass.fetchElementforAnchor("Industry",driver);
 		 ActionClass.clickOnTheElement(industryElement);
 		 ActionClass.waitForInvisibilityOFElementPresent(wait,industryDropdown);
 		 ActionClass.selectDropdown(driver, tagNameList, "Agriculture");
         
-		 WebElement typeElement = ActionClass.fetchElement(driver,type);
+		 WebElement typeElement = ActionClass.fetchElementforAnchor("Type",driver);
 		 ActionClass.clickOnTheElement(typeElement);
 		 ActionClass.waitForInvisibilityOFElementPresent(wait,typeDropdown);
 		 ActionClass.selectDropdown(driver, tagNameList, "Customer");
         
-		 WebElement employeeElement = ActionClass.fetchElement(driver,employee);
+		 WebElement employeeElement = ActionClass.fetchElementforInput("Employee",driver);
 		 ActionClass.textFieldType(employeeElement, "EmployeeData");
         
 		 //billingAdress
-		 WebElement billingStreetElement = ActionClass.fetchElement(driver, billingStreet);
+		 WebElement billingStreetElement = ActionClass.fetchElementforAddressTextArea("Billing Street",driver);
 		 ActionClass.textFieldType(billingStreetElement, "Bangalore Street No 12344");
    	    
-   	     WebElement billingCityElement = ActionClass.fetchElement(driver, billingCity);
-	     ActionClass.textFieldType(billingCityElement, "Bangalore");
+   	     WebElement billingCityElement = ActionClass.fetchElementforAddressInput("Billing City",driver);
+   	     ActionClass.textFieldType(billingCityElement, "Bangalore");
 	    
-	     WebElement billingStateElement = ActionClass.fetchElement(driver, billingState);
+	     WebElement billingStateElement = ActionClass.fetchElementforAddressInput("Billing State/Province",driver);
 	     ActionClass.textFieldType(billingStateElement, "karnataka");
 	    
-	     WebElement billingPostalCodeElement = ActionClass.fetchElement(driver, billingPostalCode);
+	     WebElement billingPostalCodeElement = ActionClass.fetchElementforAddressInput("Billing Zip/Postal Code",driver);
 	     ActionClass.textFieldType(billingPostalCodeElement, "560078");
 	    
-	     WebElement billingCountryElement = ActionClass.fetchElement(driver, billingCountry);
+	     WebElement billingCountryElement = ActionClass.fetchElementforAddressInput("Billing Country",driver);
 	     ActionClass.textFieldType(billingCountryElement, "India");
 	     //shippingAdress
-	     WebElement shippingStreetElement = ActionClass.fetchElement(driver, shippingStreet);
-   	     ActionClass.textFieldType(shippingStreetElement, "Chennai Street No 12344");
+	     WebElement shippingStreetElement = ActionClass.fetchElementforAddressTextArea("Shipping Street",driver);
+	     ActionClass.textFieldType(shippingStreetElement, "Chennai Street No 12344");
    	    
-   	     WebElement shippingCityElement = ActionClass.fetchElement(driver, shippingCity);
-	     ActionClass.textFieldType(shippingCityElement, "Chennai");
+   	     WebElement shippingCityElement = ActionClass.fetchElementforAddressInput("Shipping City",driver);
+   	     ActionClass.textFieldType(shippingCityElement, "Chennai");
 	    
-	     WebElement shippingStateElement = ActionClass.fetchElement(driver, shippingState);
+	     WebElement shippingStateElement = ActionClass.fetchElementforAddressInput("Shipping State",driver);
 	     ActionClass.textFieldType(shippingStateElement, "Tamil Nadu");
 	    
-	     WebElement shippingPostalCodeElement = ActionClass.fetchElement(driver, shippingPostalCode);
+	     WebElement shippingPostalCodeElement = ActionClass.fetchElementforAddressInput("Shipping Zip/Postal Code",driver);
 	     ActionClass.textFieldType(shippingPostalCodeElement, "560078");
 	    
-	     WebElement shippingCountryElement = ActionClass.fetchElement(driver, shippingCountry);
+	     WebElement shippingCountryElement = ActionClass.fetchElementforAddressInput("Shipping Country",driver);
 	     ActionClass.textFieldType(shippingCountryElement, "India");
    	     
          
-         //WebElement saveBtnElement = ActionClass.fetchElement(driver,saveBtn);
-         //ActionClass.clickOnTheElement(saveBtnElement);
+         //WebElement saveBtnElement = ac.fetchElement(driver,saveBtn);
+         //ac.clickOnTheElement(saveBtnElement);
 	    
 	     //System.out.println("The information was saved succesfully");
 
-	}
-	
-	
-
-	public static void tearDown() {
-		driver.quit();		
 	}
 
 	public static void CreateNewAccountAdressSearchDropDown() {
 		wait.until(ExpectedConditions.titleIs("New Account | Salesforce"));
 		System.out.println("The title of create new account page is : " +driver.getTitle());
-			
-		//SHIPPING ADDRESS
-		driver.findElement(By.xpath("//span[contains(text(),'Shipping Address')]//ancestor::fieldset//button")).click();
-		 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Address Search')]")));
-		System.out.println("---Shipping adress dropdown---");
-		WebElement ShippingAdressTextBox = driver.findElement(By.xpath("//input[@data-aura-class = 'uiInput uiInputTextForAutocomplete uiInput--default uiInput--input']"));
-		ShippingAdressTextBox.click();
-		ShippingAdressTextBox.clear();
-		//ShippingAdressTextBox.sendKeys("JP NAGAR, BENGALURU");
-		//ShippingAdressTextBox.click();
-		   
-		//Actions act = new Actions(driver);
-		//act.moveToElement(ShippingAdressTextBox).keyDown(Keys.SHIFT).sendKeys("JP nagar, Bengaluru").sendKeys(Keys.ENTER);
-		//act.build().perform();
-		    
-	    String key = "JP Nagar, Bengaluru";
-		for(int i = 0 ; i < key.length(); i++) {
-			 char val = key.charAt(i);
-			 wait.until(ExpectedConditions.visibilityOf(ShippingAdressTextBox));
-			 ShippingAdressTextBox.sendKeys(String.valueOf(val));
-	    }
-		    
-		 
-		/*try {
-			new WebDriverWait(driver, 1000).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class = 'listContent']/ul/li")));
-			}catch(org.openqa.selenium.StaleElementReferenceException ex){
-				driver.findElement(By.xpath("//div[@class = 'listContent']/ul/li"));
-				}*/
-		 
-		try{
-			Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				}
-		  
-		//driver.findElement(By.xpath("//div[@class = 'listContent']//span[contains(text(),'Bengaluru, Karnataka')]")).click();
-		ShippingAdressTextBox.sendKeys(Keys.ARROW_DOWN);
-		ShippingAdressTextBox.sendKeys(Keys.ARROW_DOWN);
-		ShippingAdressTextBox.sendKeys(Keys.ENTER);
-	     
-	     
-	     
-	     //BILLING ADDRESS
-	     driver.findElement(By.xpath("//span[normalize-space()='Billing Address']/ancestor::fieldset/div//span[contains(text(),'Search Address')]")).click();
-	     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Address Search')]")));
-	     System.out.println("---Billing adress dropdown---");
-    	 
-	     WebElement BillingAdressTextBox = driver.findElement(By.xpath("//input[@class=' default input uiInput uiInputTextForAutocomplete uiInput--default uiInput--input']"));
-	     BillingAdressTextBox.click(); 
-	     BillingAdressTextBox.clear();
-		    
-		 String key1 = "T Nagar, Chennai";
-		 for(int i = 0 ; i < key1.length(); i++) {
-			 char val = key1.charAt(i);
-			 wait.until(ExpectedConditions.visibilityOf(BillingAdressTextBox));
-			 BillingAdressTextBox.sendKeys(String.valueOf(val));
-		 }
-		  		 
-		 try{
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-	   	 }
-		 
-
-		 BillingAdressTextBox.sendKeys(Keys.ARROW_DOWN);
-		 BillingAdressTextBox.sendKeys(Keys.ARROW_DOWN);
-		 BillingAdressTextBox.sendKeys(Keys.ENTER);
-	     
-		 
-	     System.out.println("DONE DONE DONE");
-		    
+		
+		ActionClass.AutoSuggestionAddressSearch("Shipping Address", "Jp Nagar, Bengaluru", driver);
+		
+		ActionClass.AutoSuggestionAddressSearch("Billing Address", "T Nagar, Chennai", driver);
 		
 	}
+
+	public static void tearDown() {
+		driver.quit();
+		
+	}
+	
+	
 
 }
